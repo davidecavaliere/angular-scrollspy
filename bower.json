@@ -1,0 +1,23 @@
+{
+  "name": "angular-scrollspy",
+  "version": "0.0.0",
+  "authors": [
+    "Davide Cavaliere <cavaliere.davide@gmail.com>"
+  ],
+  "description": "simple event-driven scrollspy directive for angularjs",
+  "main": "angular-scrollspy.js",
+  "keywords": [
+    "angularjs",
+    "scrollspy"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/davidecavaliere/angular-scrollspy",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components",
+    "test",
+    "tests"
+  ]
+}
