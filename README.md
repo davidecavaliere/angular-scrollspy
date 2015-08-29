@@ -1,51 +1,58 @@
 # angularjs scrollspy directive
 
-[TODO - brief summary]
+#### angular-scrollspy is a simple scrollspy directive for angularjs
+
+This module is an event driver scrollspy directive. In other words is uses events to highlight the right anchor at the right time. I guess this is a more performat approach to list/array solutions. In any case in a good showcase of angularjs events.
 
 ## Demo
-http://davidecavaliere.github.io/angular-scrollspy/
+to come
 
 ## Dependencies
-- required:
-	[TODO]
-- optional
-	[TODO]
+```
+"dependencies": {
+  "angular":"~1.2.0",
+  "angular-animate":"~1.2.0",
+  "angular-sanitize":"~1.2.0",
+},
+```
 
-See `bower.json` and `index.html` in the `gh-pages` branch for a full list / more details
+TODO: should just rely on angularjs.
+TODO: use an newer version
 
 ## Install
-1. download the files
-	1. Bower
-		1. add `"angular-scrollspy": "latest"` to your `bower.json` file then run `bower install` OR run `bower install angular-scrollspy`
-2. include the files in your app
-	1. `scrollspy.min.js`
-	2. `scrollspy.less` OR `scrollspy.min.css` OR `scrollspy.css`
-3. include the module in angular (i.e. in `app.js`) - `davidecavaliere.angular-scrollspy`
 
-See the `gh-pages` branch, files `bower.json` and `index.html` for a full example.
+##### Bower
+```
+bower install davidecavaliere/angualar-scrollspy
+```
+##### app.js
+inject the module
+```
+'davidecavaliere.angular-scrollspy'
+```
 
+##### the view
+```
+<div style="float: right; position: fixed; background-color: white">
+  <ul>
+    <li scrollspy-receiver="'first'">first</li>
+    <li scrollspy-receiver="'second'">second</li>
+    <li scrollspy-receiver="'third'">third</li>
+    <li scrollspy-receiver="'fourth'">fourth</li>
+    <li scrollspy-receiver="'fifth'">fifth</li>
+    <li scrollspy-receiver="'sixth'">sixth</li>
+  </ul>
+</div>
+```
+You're done
 
 ## Documentation
-See the `scrollspy.js` file top comments for usage examples and documentation
-https://github.com/davidecavaliere/angular-scrollspy/blob/master/scrollspy.js
+See the `scrollspy.js` and `home.html` for source code and example
+https://github.com/davidecavaliere/angular-scrollspy
 
 
 ## Development
 
-1. `git checkout gh-pages`
-	1. run `npm install && bower install`
-	2. write your code then run `grunt`
-	3. git commit your changes
-2. copy over core files (.js and .css/.less for directives) to master branch
-	1. `git checkout master`
-	2. `git checkout gh-pages scrollspy.js scrollspy.min.js scrollspy.less scrollspy.css scrollspy.min.css`
-3. update README, CHANGELOG, bower.json, and do any other final polishing to prepare for publishing
-	1. git commit changes
-	2. git tag with the version number, i.e. `git tag v1.0.0`
-4. create github repo and push
-	1. [if remote does not already exist or is incorrect] `git remote add origin [github url]`
-	2. `git push origin master --tags` (want to push master branch first so it is the default on github)
-	3. `git checkout gh-pages`
-	4. `git push origin gh-pages`
-5. (optional) register bower component
-	1. `bower register angular-scrollspy [git repo url]`
+#### This project is still in a early stage. IS NOT PRODUCTION READY. Even though it is fully functional has not been tests. Use at your own risk.
+
+#### You're more than welcome to fork and contribute to this project. It uses yeoman's `generator-angular-module` so please check [https://www.npmjs.com/package/generator-angular-module](https://www.npmjs.com/package/generator-angular-module).
