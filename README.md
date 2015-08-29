@@ -2,7 +2,7 @@
 
 #### angular-scrollspy is a simple scrollspy directive for angularjs
 
-This module is an event driver scrollspy directive. In other words is uses events to highlight the right anchor at the right time. I guess this is a more performat approach to list/array solutions. In any case in a good showcase of angularjs events.
+This module is an event driver scrollspy directive. In other words is uses events to highlight the right anchor at the right time. I guess this is a more efficient approach to list/array solutions. In any case in a good showcase of angularjs events.
 
 ## Demo
 to come
@@ -32,7 +32,10 @@ inject the module
 ```
 
 ##### the view
-```
+
+set up the anchors
+
+```html
 <div style="float: right; position: fixed; background-color: white">
   <ul>
     <li scrollspy-receiver="'first'">first</li>
@@ -44,6 +47,19 @@ inject the module
   </ul>
 </div>
 ```
+
+set up the triggers
+
+```html
+<div style="height:1000px; background-color: white;">1</div>
+<div scrollspy-trigger="'first'" style="height:200px; background-color: red;">1</div>
+<div scrollspy-trigger="'second'" style="height:300px; background-color: pink;">2</div>
+<div scrollspy-trigger="'third'" style="height:400px; background-color: yellow;">3</div>
+<div scrollspy-trigger="'fourth'" style="height:500px; background-color: red;">4</div>
+<div scrollspy-trigger="'fifth'" style="height:600px; background-color: pink;">5</div>
+<div scrollspy-trigger="'sixth'" style="height:900px; background-color: yellow;">6</div>
+```
+
 You're done
 
 ## Documentation
