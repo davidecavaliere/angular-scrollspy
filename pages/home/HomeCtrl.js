@@ -3,6 +3,9 @@
 
 'use strict';
 
-angular.module('myApp').controller('HomeCtrl', ['$scope', function($scope) {
+angular.module('myApp').controller('HomeCtrl', function($scope, $log) {
 	//TODO - put any directive code here
-}]);
+
+	$scope.scrollspyTrigger = {};
+
+});

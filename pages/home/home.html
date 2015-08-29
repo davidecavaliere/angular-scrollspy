@@ -1,3 +1,30 @@
-<div ng-controller='HomeCtrl'>	
+<div ng-controller='HomeCtrl'>
 	<!-- TODO: place directive call here -->
+
+<style>
+	.active {
+		color : red;
+	}
+</style>
+
+
+	<div style="float: right; position: fixed; background-color: white">
+		<ul>
+			<li scrollspy-receiver="'first'">first</li>
+			<li scrollspy-receiver="'second'">second</li>
+			<li scrollspy-receiver="'third'">third</li>
+			<li scrollspy-receiver="'fourth'">fourth</li>
+			<li scrollspy-receiver="'fifth'">fifth</li>
+			<li scrollspy-receiver="'sixth'">sixth</li>
+		</ul>
+	</div>
+
+	<div style="height:1000px; background-color: white;">1</div>
+	<div scrollspy-trigger="'first'" style="height:200px; background-color: red;">1</div>
+	<div scrollspy-trigger="'second'" style="height:300px; background-color: pink;">2</div>
+	<div scrollspy-trigger="'third'" style="height:400px; background-color: yellow;">3</div>
+	<div scrollspy-trigger="'fourth'" style="height:500px; background-color: red;">4</div>
+	<div scrollspy-trigger="'fifth'" style="height:600px; background-color: pink;">5</div>
+	<div scrollspy-trigger="'sixth'" style="height:900px; background-color: yellow;">6</div>
+
 </div>
