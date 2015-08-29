@@ -46,7 +46,7 @@ angular.module('davidecavaliere.angular-scrollspy', [])
   }
 }])
 
-.directive('scrollspyTrigger', function (config, scrollspyConfig, /*SpyFactory,*/ PositionFactory, $log) {
+.directive('scrollspyTrigger', function (config, scrollspyConfig, /*SpyFactory,*/ PositionFactory, $log, $rootScope) {
 	return {
 		restrict : 'A',
 		scope : {
@@ -55,7 +55,7 @@ angular.module('davidecavaliere.angular-scrollspy', [])
 		link : function(scope, element, attrs) {
 			angular.extend(config, scrollspyConfig.config);
 
-			$log.debug('scrollspyTrigger', scope.scrollspyTrigger);
+			// $log.debug('scrollspyTrigger', scope.scrollspyTrigger);
 			scope.checkActive = function() {
 				var offset = parseInt(attrs.scrollspyOffset || config.offset);
 
@@ -67,8 +67,8 @@ angular.module('davidecavaliere.angular-scrollspy', [])
 
 				// or windowTop if you want
 				var scrollTop = angular.element(document.body)[0].scrollTop + offset;
-				// $log.debug('document scroll offset', scrollTop);
-				// $log.debug('element : ', element, 'offset top', elementTop);
+				// // $log.debug('document scroll offset', scrollTop);
+				// // $log.debug('element : ', element, 'offset top', elementTop);
 
 				var windowHeight = window.innerHeight;
 
@@ -77,30 +77,30 @@ angular.module('davidecavaliere.angular-scrollspy', [])
 
 					// the bottom of the element is at coords
 				var elementBottom = elementTop + element[0].offsetHeight;
-				// $log.debug('element bottom', elementBottom, 'window bottom', windowBottom);
+				// // $log.debug('element bottom', elementBottom, 'window bottom', windowBottom);
 
 				if (!(elementHeight < windowHeight)) { // if elementHeight >= windowHeight
 					if (elementTop > windowBottom || elementBottom < scrollTop) {
 						scope.phase = 'out';
-						$log.debug('element ', element, 'is ' + scope.phase);
-					}	else if (elementTop >= scrollTop) {
+						// $log.debug('element ', element, 'is ' + scope.phase);
+					}	else if (elementTop > scrollTop) {
 						scope.phase = 'entering';
-						$log.debug('element ', element, 'is ' + scope.phase);
+						// $log.debug('element ', element, 'is ' + scope.phase);
 					} else if (elementBottom > scrollTop && elementBottom < windowBottom) {
 						scope.phase = 'leaving';
-						$log.debug('element ', element, 'is ' + scope.phase);
-					} else if (elementTop < scrollTop && elementBottom >= windowBottom ) {
+						// $log.debug('element ', element, 'is ' + scope.phase);
+					} else if (elementTop <= scrollTop && elementBottom >= windowBottom ) {
 						scope.phase = 'in';
-						$log.debug('element ', element, 'is ' + scope.phase);
+						// $log.debug('element ', element, 'is ' + scope.phase);
 					}
 				} else {
 					if (elementTop > windowBottom || elementBottom < scrollTop) { // element is out of the page
 						scope.phase = 'out';
-						$log.debug('element ', element, 'is ' + scope.phase);
+						// $log.debug('element ', element, 'is ' + scope.phase);
 					} else if ( elementBottom > windowBottom) { // until elementBottom is out of the page
 						// the element is entering
 						scope.phase = 'entering';
-						$log.debug('element ', element, 'is ' + scope.phase);
+						// $log.debug('element ', element, 'is ' + scope.phase);
 					} else if (
 						// element is fully on page
 						elementBottom <= windowBottom && elementTop >= scrollTop
@@ -110,15 +110,15 @@ angular.module('davidecavaliere.angular-scrollspy', [])
 						// we may have more than one element fully on page at time
 						// we may need to weight the position of the element regarding the page
 						scope.phase = 'in';
-						$log.debug('element ', element, 'is ' + scope.phase);
+						// $log.debug('element ', element, 'is ' + scope.phase);
 					} else if (elementBottom >= scrollTop && elementTop < scrollTop) {
 						// element is leaving the page
 						scope.phase = 'leaving';
-						$log.debug('element ', element, 'is ' + scope.phase);
+						// $log.debug('element ', element, 'is ' + scope.phase);
 					}
 				}
-				$log.debug('emiting scrollspy:' + scope.scrollspyTrigger, scope.phase);
-				scope.$parent.$broadcast('scrollspy:' + scope.scrollspyTrigger, scope.phase);
+				// $log.debug('emiting scrollspy:' + scope.scrollspyTrigger, scope.phase);
+				$rootScope.$broadcast('scrollspy:' + scope.scrollspyTrigger, scope.phase);
 			}
 
 			if (config.throttle) {
@@ -149,7 +149,7 @@ angular.module('davidecavaliere.angular-scrollspy', [])
 
 		link: function(scope, element, attrs) {
 			scope.$on('scrollspy:' + scope.scrollspyReceiver, function(event, phase) {
-					$log.debug('got scrollspy:'  + scope.scrollspyReceiver, phase);
+					// $log.debug('got scrollspy:'  + scope.scrollspyReceiver, phase);
 
 					if (phase == 'out') {
 						element.removeClass('active');
@@ -157,6 +157,7 @@ angular.module('davidecavaliere.angular-scrollspy', [])
 						element.addClass('active');
 					} else if (phase == 'leaving') {
 						// we may want to add animation here
+						element.addClass('active');
 					} else if (phase == 'entering') {
 						// we may want to add animation here
 					}
