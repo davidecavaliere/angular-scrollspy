@@ -1,28 +1,23 @@
 {
-	"name": "angular-scrollspy",
-	"version": "1.0.0",
-	"authors": [
-		"Davide Cavaliere <cavaliere.davide@gmail.com>"
-	],
-	"description": "angularjs scrollspy directive",
-	"keywords": [
-		"angularjs",
-		"scrollspy",
-		"directive"
-	],
-	"license": "MIT",
-	"ignore": [
-		"**/.*",
-		"node_modules",
-		"bower_components",
-		"test",
-		"tests"
-	],
-	"dependencies": {
-		"angular":"~1.2.0",
-		"angular-animate":"~1.2.0",
-		"angular-sanitize":"~1.2.0",
-	},
-	"devDependencies": {
-	}
+        "name": "angular-scrollspy",
+        "version": "0.0.0",
+        "authors": [
+                "Davide Cavaliere <cavaliere.davide@gmail.com>"
+        ],
+        "description": "Demo",
+        "keywords": [
+        ],
+        "license": "MIT",
+        "ignore": [
+                "**/.*",
+                "node_modules",
+                "app/bower_components",
+                "pages"
+        ],
+        "dependencies": {
+                "angular":">=1.2.0",
+                "angular-sanitize":">=1.2.0"
+        },
+        "devDependencies": {
+        }
 }
