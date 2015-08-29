@@ -25,7 +25,7 @@ TODO
 angular.module('davidecavaliere.angular-scrollspy', [])
 
 .value('config', {
-	'offset': 200,
+	'offset': 70,
 	'delay': 100
 })
 
