@@ -1,7 +1,7 @@
 {
         "name": "angular-scrollspy",
         "version": "0.0.2",
-        "main": "scrollspy.min.js",
+        "main": "scrollspy.js",
         "authors": [
                 "Davide Cavaliere <cavaliere.davide@gmail.com>"
         ],
