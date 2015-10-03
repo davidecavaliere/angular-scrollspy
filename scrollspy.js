@@ -48,7 +48,7 @@ angular.module('davidecavaliere.angular-scrollspy', [])
   }
 }])
 
-.directive('scrollspyTrigger', function (config, scrollspyConfig, $timeout, PositionFactory, $log) {
+.directive('scrollspyTrigger', function (config, scrollspyConfig, $timeout, PositionFactory, $log, $rootScope) {
 	return {
 		restrict : 'A',
 		scope : {
@@ -96,15 +96,13 @@ angular.module('davidecavaliere.angular-scrollspy', [])
 				}
 
 				$log.debug('emiting scrollspy:' + scope.scrollspyTrigger, scope.phase);
-				scope.$parent.$broadcast('scrollspy:' + scope.scrollspyTrigger, scope.phase);
+				$rootScope.$broadcast('scrollspy:' + scope.scrollspyTrigger, scope.phase);
 			}
 
 			if (config.throttle) {
 				angular.element(window).bind('scroll', config.throttle(function() { scope.checkActive() }, config.delay));
 			} else {
-				$timeout(function() {
-					angular.element(window).bind('scroll', function() { scope.checkActive() });
-				}, config.delay);
+				angular.element(window).bind('scroll', function() { scope.checkActive() });
 			}
 
 			scope.$$postDigest(function() {
@@ -131,14 +129,14 @@ angular.module('davidecavaliere.angular-scrollspy', [])
 			scope.$on('scrollspy:' + scope.scrollspyReceiver, function(event, phase) {
 					$log.debug('got scrollspy:'  + scope.scrollspyReceiver, phase);
 
-					if (phase == 'out') {
-						element.removeClass('active');
-					} else if (phase == 'in') {
-						element.addClass('active');
-					} else if (phase == 'leaving') {
-						// we may want to add animation here
-					} else if (phase == 'entering') {
-						// we may want to add animation here
+					switch (phase) {
+						case 'out' :
+							element.removeClass('active');
+							break;
+						case 'in' :
+							element.addClass('active');
+							break;
+						default:
 					}
 			});
 		},
