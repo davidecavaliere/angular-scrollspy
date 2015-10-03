@@ -28,7 +28,9 @@ angular.module('davidecavaliere.angular-scrollspy', [])
 	'offset': 300,
 	'delay': 100
 })
-
+.config(function($logProvider) {
+	$logProvider.debugEnabled(false);
+})
 .run(['PositionFactory', function(PositionFactory) {
   PositionFactory.refreshPositions();
   angular.element(window).bind('scroll', function() {
