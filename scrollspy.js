@@ -51,14 +51,17 @@ angular.module('davidecavaliere.angular-scrollspy', [])
 .directive('scrollspyTrigger', function (config, scrollspyConfig, $timeout, PositionFactory, $log, $rootScope) {
 	return {
 		restrict : 'A',
-		scope : {
-			scrollspyTrigger : '='
-		},
+        scope : true,
 		link : function(scope, element, attrs) {
 			angular.extend(config, scrollspyConfig.config);
 
-			// $log.debug('scrollspyTrigger', scope.scrollspyTrigger);
-			scope.checkActive = function() {
+            if (!attrs.id) {
+                return $log.error('scrollspyTrigger element must have an id', element);
+            }
+            scope.scrollspyTrigger = '#' + attrs.id;
+            $log.debug('scrollspyTrigger', scope.scrollspyTrigger);
+
+            scope.checkActive = function() {
 				var offset = parseInt(attrs.scrollspyOffset || config.offset);
 
 				scope.phase = 'out'; // phase is one of out, entering, in, leaving
@@ -70,8 +73,8 @@ angular.module('davidecavaliere.angular-scrollspy', [])
 
 				// or windowTop if you want
 				var scrollTop = angular.element(document.body)[0].scrollTop;
-				// // $log.debug('document scroll offset', scrollTop);
-				// // $log.debug('element : ', element, 'offset top', elementTop);
+				// $log.debug('document scroll offset', scrollTop);
+				// $log.debug('element : ', element, 'offset top', elementTop);
 
 				var windowHeight = window.innerHeight;
 
@@ -80,7 +83,7 @@ angular.module('davidecavaliere.angular-scrollspy', [])
 
 					// the bottom of the element is at coords
 				var elementBottom = elementTop + element[0].offsetHeight;
-				// // $log.debug('element bottom', elementBottom, 'window bottom', windowBottom);
+				// $log.debug('element bottom', elementBottom, 'window bottom', windowBottom);
 
 				var top = scrollTop + offset;
 				var bottom = windowBottom - offset;
@@ -88,14 +91,14 @@ angular.module('davidecavaliere.angular-scrollspy', [])
 				if (elementTop > bottom || elementBottom < top) {
 					// $log.debug('element is outside the window');
 					scope.phase = 'out';
-					// $log.debug('element ', element, 'is ' + scope.phase);
+					$log.debug('element ', element, 'is ' + scope.phase);
 
 				} else {
 					scope.phase = 'in';
-					// $log.debug('element ', element, 'is ' + scope.phase);
+					$log.debug('element ', element, 'is ' + scope.phase);
 				}
 
-				// $log.debug('emiting scrollspy:' + scope.scrollspyTrigger, scope.phase);
+				$log.debug('emiting scrollspy:' + scope.scrollspyTrigger, scope.phase);
 				$rootScope.$broadcast('scrollspy:' + scope.scrollspyTrigger, scope.phase);
 			}
 
@@ -121,20 +124,23 @@ angular.module('davidecavaliere.angular-scrollspy', [])
 
 	return {
 		restrict: 'A',
-		scope: {
-			scrollspyReceiver : '='
-		},
-
+        scope: true,
 		link: function(scope, element, attrs) {
-			scope.$on('scrollspy:' + scope.scrollspyReceiver, function(event, phase) {
-					// $log.debug('got scrollspy:'  + scope.scrollspyReceiver, phase);
+            if (!attrs.href) {
+                return $log.error(element + 'must have href attribute');
+            }
+
+            scope.scrollspyReceiver = attrs.href;
+
+            scope.$on('scrollspy:' + scope.scrollspyReceiver, function(event, phase) {
+					$log.debug('got scrollspy:'  + scope.scrollspyReceiver, phase);
 
 					switch (phase) {
 						case 'out' :
-							element.removeClass('active');
+							element.parent().removeClass('active');
 							break;
 						case 'in' :
-							element.addClass('active');
+							element.parent().addClass('active');
 							break;
 						default:
 					}
